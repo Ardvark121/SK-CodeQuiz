@@ -19,3 +19,8 @@ button {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+#options {
+  display: flex;
+  flex-direction: row;
+}

@@ -23,6 +23,7 @@ const Answers1 = [
 const Answers2 = ["True", "False"];
 //adds all the options for each question into an array
 const AnswrArray = [Answers0, Answers1, Answers2];
+//contains all correct answers in an Array
 const CorAns = [
   'document.write("Hello World")',
   '<script src="xxx.js">',
@@ -46,19 +47,24 @@ function Counter() {
 
 function switchques() {
   Answers = AnswrArray[a];
-  quiz.innerHTML = QuestArray[a];
   while (options.lastChild) {
     options.removeChild(options.lastChild);
   }
-
-  for (var i = 0; i < Answers.length; i++) {
-    var optionli = document.createElement("li");
-    var optionbut = document.createElement("button");
-    optionbut.textContent = Answers[i];
-    optionbut.setAttribute("id", "button" + i);
-    optionli.append(optionbut);
-    options.append(optionli);
-    optionbut.addEventListener("click", checkquest);
+  if (QuestArray[a] == null) {
+    quiz.innerHTML = "Done";
+    RecordScore();
+  } else {
+    quiz.innerHTML = QuestArray[a];
+    console.log(QuestArray[a]);
+    for (var i = 0; i < Answers.length; i++) {
+      var optionli = document.createElement("li");
+      var optionbut = document.createElement("button");
+      optionbut.textContent = Answers[i];
+      optionbut.classList.add("OptBut");
+      optionli.append(optionbut);
+      options.append(optionli);
+      optionbut.addEventListener("click", checkquest);
+    }
   }
   a++;
 }
@@ -71,5 +77,19 @@ function checkquest(event) {
     footer.textContent = "Incorrect";
   }
 }
+function RecordScore() {
+  var theNd = document.createElement("ul");
+  theNd.textContent = "Your score is " + count + " seconds";
+  options.append(theNd);
+  var Initial = document.createElement("input");
+  Initial.setAttribute("type", "text");
+  options.textContent = "Name:";
+  var Submit = document.createElement("button");
+  Submit.textContent = "Submit";
+  options.append(Initial);
+  options.append(Submit);
+  Submit.addEventListener("click", RecordPage);
+}
+function RecordPage() {}
 
 starter.addEventListener("click", Counter);

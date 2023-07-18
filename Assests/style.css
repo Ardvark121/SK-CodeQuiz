@@ -10,7 +10,7 @@ h2 {
   text-align: center;
 }
 /*set postion and look of the button*/
-button {
+.OptBut {
   color: white;
   background-color: blueviolet;
   margin: 0;

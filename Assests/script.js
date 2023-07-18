@@ -4,24 +4,34 @@ const starter = document.querySelector("#Startbutton");
 //Puts a
 const QuestArray = [
   'What is the correct JavaScript syntax to write "Hello World"?',
+  "What is the correct syntax for referring to an external script called",
 ];
-//includes all the options for the first question
-const Answers1 = [
+//includes all the options for the first, second, and third question
+const Answers0 = [
   'response.write("Hello World")',
   '"Hello World"',
   'document.write("Hello World")',
   '("Hello World")',
 ];
+const Answers1 = [
+  '<script src="xxx.js">',
+  '<script src="xxx.js">',
+  '<script href="xxx.js">',
+  '<script value="xxx.js">',
+];
+const Answers2 = ["True", "False"];
 //adds all the options for each question into an array
-const AnswrArray = [Answers1];
-const CorAns = ['document.write("Hello World")'];
+const AnswrArray = [Answers0, Answers1, Answers2];
+const CorAns = [
+  'document.write("Hello World")',
+  '<script src="xxx.js">',
+  "False",
+];
 var quiz = document.querySelector("#Questions");
 var options = document.querySelector("#Options");
 var footer = document.querySelector("#check");
-var pick = "";
 
 var a = 0;
-
 var count = 0;
 
 function Counter() {
@@ -39,7 +49,7 @@ function switchques() {
   for (var i = 0; i < Answers.length; i++) {
     var optionli = document.createElement("li");
     var optionbut = document.createElement("button");
-    optionbut.innerHTML = Answers[i];
+    optionbut.textContent = Answers[i];
     optionbut.setAttribute("id", "button" + i);
     optionli.append(optionbut);
     options.append(optionli);
@@ -49,12 +59,13 @@ function switchques() {
       quiz.innerHTML = QuestArray[i];
     }
   }
-  a = a + 1;
+  a++;
 }
 
 function checkquest(event) {
   if (CorAns.includes(event.target.textContent)) {
     footer.textContent = "Correct!";
+    switchques();
   } else {
     footer.textContent = "Incorrect";
   }

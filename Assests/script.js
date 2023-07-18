@@ -5,6 +5,7 @@ const starter = document.querySelector("#Startbutton");
 const QuestArray = [
   'What is the correct JavaScript syntax to write "Hello World"?',
   "What is the correct syntax for referring to an external script called",
+  "Assignment operators are used to perform mathematical calculations, such as addition, subtraction, multiplication, and division.",
 ];
 //includes all the options for the first, second, and third question
 const Answers0 = [
@@ -45,6 +46,10 @@ function Counter() {
 
 function switchques() {
   Answers = AnswrArray[a];
+  quiz.innerHTML = QuestArray[a];
+  while (options.lastChild) {
+    options.removeChild(options.lastChild);
+  }
 
   for (var i = 0; i < Answers.length; i++) {
     var optionli = document.createElement("li");
@@ -54,10 +59,6 @@ function switchques() {
     optionli.append(optionbut);
     options.append(optionli);
     optionbut.addEventListener("click", checkquest);
-
-    if (i == 0) {
-      quiz.innerHTML = QuestArray[i];
-    }
   }
   a++;
 }

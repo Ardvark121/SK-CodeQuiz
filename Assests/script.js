@@ -81,13 +81,14 @@ function checkquest(event) {
     footer.textContent = "Correct!";
     switchques();
   } else {
+    count++;
     footer.textContent = "Incorrect";
   }
 }
 function Recordscorepage() {
   footer.textContent = "";
   var theNd = document.createElement("div");
-  theNd.textContent = "Your score is " + count + " seconds";
+  theNd.textContent = "Your score is " + count;
   var recentscore = count;
   quiz.append(theNd);
   var Initial = document.createElement("input");
@@ -105,21 +106,30 @@ function Recordscorepage() {
         name: Initial.value,
       };
       hiscores.push(score);
-      hiscores.sort((a, b) => b.score - a.score);
+      hiscores.sort((a, b) => a.score - b.score);
       console.log(hiscores);
       listhiscores();
     } else {
       quiz.innerHTML = "Please provide name";
     }
   }
+  function listhiscores() {
+    Initial.remove();
+    Submit.remove();
+    options.textContent = "";
+    starter.textContent = "reset";
+    a = 0;
+    starter.hidden = false;
+    quiz.textContent = "Highscores!";
+    console.log(hiscores[0]);
+    for (var i = 0; i < hiscores.length; i++) {
+      var Scoreboard = document.createElement("p");
+      Scoreboard.textContent = hiscores[i].name + ": " + hiscores[i].score;
+      options.append(Scoreboard);
+    }
+  }
 }
 
-function listhiscores() {
-  starter.textContent = "reset";
-  a = 0;
-  starter.hidden = false;
-  for (var i = 0; i < hiscores.length; i++) {}
-}
 function setcoount() {
   count = 0;
   switchques();
